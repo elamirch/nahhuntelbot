@@ -12,7 +12,6 @@ $chat_sessions = [];
 $current_session = [];
 $current_session_name = '';
 
-
 while (true) {
 sleep(2);
 echo "Last update id: " . $last_update_id . "\n";
