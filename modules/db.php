@@ -1,7 +1,9 @@
 <?php
+    $pdo = new stdClass();
+
     //Variables are derived from .env in bootstrap.php
     function db_up() {
-        global $DB_HOST, $DB_PORT, $DB_USER, $DB_PASS, $DB_NAME;
+        global $DB_HOST, $DB_PORT, $DB_USER, $DB_PASS, $DB_NAME, $pdo;
 
         $pdo = new PDO("mysql:host=$DB_HOST;port=$DB_PORT", $DB_USER, password: $DB_PASS);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
