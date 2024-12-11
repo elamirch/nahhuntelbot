@@ -1,16 +1,23 @@
 <?php
     //Variables are derived from .env in bootstrap.php
-    $pdo = new PDO("mysql:host=$DB_HOST;port=$DB_PORT", $DB_USER, password: $DB_PASS);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
-    $create_db = $pdo->prepare("CREATE DATABASE IF NOT EXISTS $DB_NAME");
-    $create_db->execute();
+    function db_up() {
+        global $DB_HOST, $DB_PORT, $DB_USER, $DB_PASS, $DB_NAME;
 
-    $pdo = new PDO("mysql:host=$DB_HOST;port=$DB_PORT;dbname=$DB_NAME", $DB_USER, $DB_PASS);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $pdo = new PDO("mysql:host=$DB_HOST;port=$DB_PORT", $DB_USER, password: $DB_PASS);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $pdo->setAttribute(PDO::ATTR_PERSISTENT, True);
+        
+        $create_db = $pdo->prepare("CREATE DATABASE IF NOT EXISTS $DB_NAME");
+        $create_db->execute();
+    
+        $pdo = new PDO("mysql:host=$DB_HOST;port=$DB_PORT;dbname=$DB_NAME", $DB_USER, $DB_PASS);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $pdo->setAttribute(PDO::ATTR_PERSISTENT, True);
+    }
+
+    db_up();
 
     try {
-
         //SQL statements to create tables
         $createOffsetsTable = "CREATE TABLE IF NOT EXISTS offsets (
             id INT AUTO_INCREMENT PRIMARY KEY,

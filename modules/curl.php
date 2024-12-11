@@ -1,8 +1,8 @@
 <?php
 
 function curl(string $url, string $data = null, array $header = null, string $request = null) {
-    while(true){
-        //Session initialization
+
+    //Session initialization
     $curl_session = curl_init($url);
     curl_setopt($curl_session, CURLOPT_RETURNTRANSFER, true);
     
@@ -25,24 +25,21 @@ function curl(string $url, string $data = null, array $header = null, string $re
     }
 
     //Adding timeout
-    curl_setopt($curl_session, CURLOPT_CONNECTTIMEOUT, 10000000);
+    curl_setopt($curl_session, CURLOPT_CONNECTTIMEOUT, 10);
 
     //Setting custom request if existed
     if($request == "DELETE") {
         curl_setopt($curl_session, CURLOPT_CUSTOMREQUEST, "DELETE");
     }
 
-    //Executing the cURL request
-    $response = curl_exec($curl_session);
-
-    //Checking for errors
-    if (curl_errno($curl_session)) {
-        echo 'Curl error: ' . curl_error($curl_session);
-        continue;
-        // throw new Exception('Curl error: ' . curl_error($curl_session));
-    } else {
-        //Print response from the server
-        return $response;
-    }
+    //Executing the cURL request and checking for errors
+    for ($i=0; $i < 10; $i++) {
+        try {
+            $response = curl_exec($curl_session);
+            //Print response from the server
+            return $response;
+        } catch(Exception $e) {
+            echo 'Curl error: ' . $e->getMessage();
+        }
     }
 }
