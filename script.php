@@ -145,7 +145,9 @@ if (isset($update->message->text)) {
                     assign_common_variables();
     
                     echo "Session_id: " . $current_session_id;
-    
+                    
+                    $telegram->sendMessage($user_id, "Wait! AI is thinking...");
+
                     $message = $chat->message($current_session_id, $update->message->text)->content;
                     
                     $message = $message . "\n\nConversation: " . $current_session_name ;

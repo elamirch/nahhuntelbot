@@ -1,7 +1,8 @@
 <?php
 
 function curl(string $url, string $data = null, array $header = null, string $request = null) {
-    //Session initialization
+    while(true){
+        //Session initialization
     $curl_session = curl_init($url);
     curl_setopt($curl_session, CURLOPT_RETURNTRANSFER, true);
     
@@ -23,6 +24,9 @@ function curl(string $url, string $data = null, array $header = null, string $re
         curl_setopt($curl_session, CURLOPT_PROXYPORT, 2081);
     }
 
+    //Adding timeout
+    curl_setopt($curl_session, CURLOPT_CONNECTTIMEOUT, 10000000);
+
     //Setting custom request if existed
     if($request == "DELETE") {
         curl_setopt($curl_session, CURLOPT_CUSTOMREQUEST, "DELETE");
@@ -33,9 +37,12 @@ function curl(string $url, string $data = null, array $header = null, string $re
 
     //Checking for errors
     if (curl_errno($curl_session)) {
-        throw new Exception('Curl error: ' . curl_error($curl_session));
+        echo 'Curl error: ' . curl_error($curl_session);
+        continue;
+        // throw new Exception('Curl error: ' . curl_error($curl_session));
     } else {
         //Print response from the server
         return $response;
+    }
     }
 }

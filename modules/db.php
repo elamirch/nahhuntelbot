@@ -2,14 +2,12 @@
     //Variables are derived from .env in bootstrap.php
     $pdo = new PDO("mysql:host=$DB_HOST;port=$DB_PORT", $DB_USER, password: $DB_PASS);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $pdo->setAttribute(PDO::ATTR_TIMEOUT, 10);
     
     $create_db = $pdo->prepare("CREATE DATABASE IF NOT EXISTS $DB_NAME");
     $create_db->execute();
-    
+
     $pdo = new PDO("mysql:host=$DB_HOST;port=$DB_PORT;dbname=$DB_NAME", $DB_USER, $DB_PASS);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $pdo->setAttribute(PDO::ATTR_TIMEOUT, 10);
 
     try {
 
@@ -56,7 +54,3 @@
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
-
-    //CREATE USER 'nahhuntel'@'%' IDENTIFIED BY 'SunGodishere#3';
-    //CREATE DATABASE nahhuntel;
-    //GRANT ALL PRIVILEGES ON nahhuntel.* TO 'nahhuntel'@'%';
