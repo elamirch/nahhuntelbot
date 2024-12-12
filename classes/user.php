@@ -5,6 +5,9 @@
             global $pdo;
             for ($i=0; $i < 10; $i++) {
                 try {
+                    echo "\n1: " . $telegram_username . "\n2: " . $telegram_user_id . "\n3: " .
+                                "\n4: " . $default_bot . "\n5: " . json_encode($chat_sessions).
+                                "\n6: " . $current_session;
                     $stmt = $pdo->prepare("INSERT INTO `users` (`telegram_username`," .
                     "`telegram_user_id`, `default_bot`, `chat_sessions`, `current_session`) VALUES (:tun, :ui, :db," .
                     " :css, :cs);");

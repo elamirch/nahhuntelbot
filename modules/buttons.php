@@ -16,16 +16,3 @@ $main_menu_raw = [
     ],
 ];
 $main_menu = json_encode($main_menu_raw);
-
-
-//Joined inline keyboard
-$joined_button = [
-    'text' => 'Joined ✅',
-    'callback_data' => 'joined',
-];
-$joined_menu_raw= [
-    'inline_keyboard' => [
-        $joined_button
-    ]
-];
-$joined_menu = json_encode($joined_menu_raw);

@@ -1,5 +1,5 @@
 <?php
-    $NEW_MEMBER_MESSAGE = "Please join our channel to use the chatbot: \n@$ASSOCIATED_CHANNEL";
+    $NEW_MEMBER_MESSAGE = "Please join our channel to use the chatbot: \n@$ASSOCIATED_CHANNEL\nRestart the bot after joining...";
     $START_MESSAGE = "Bot started, send any message to initiate a conversation!\n\n" .
     "\n\nAnytime you needed more help on how to make the best use of the bot, use the".
     "main menu\n\nCreated with love by @$ADMIN_USER_NAME ❤️";

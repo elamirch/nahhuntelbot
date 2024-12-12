@@ -18,7 +18,7 @@ echo "Last update id: " . $last_update_id . "\n";
 $updates = json_decode($telegram->getUpdates($last_update_id))->result ?? False;
 if ($updates) {
 foreach ($updates as $update) {
-
+    var_dump($update);
 //This is the code that runs in each cycle:
 $last_update_id = $update->update_id;
 $user_id = $update->message->from->id ?? $update->callback_query->from->id;
@@ -28,11 +28,12 @@ $user_id = $update->message->from->id ?? $update->callback_query->from->id;
 //first name (which is exactly what we'll use for usage monitoring
 $user_info = json_decode($telegram->getChatMember($user_id))->result;
 
+var_dump($user_info);
 //If the user sent a text (and not a callback_query)
 if (isset($update->message->text)) {
     //Ask the user to join the bot's channel if not yet joined
     if ($user_info->status == "left") {
-        $telegram->sendMessage($user_id, $NEW_MEMBER_MESSAGE, $joined_menu);
+        $telegram->sendMessage($user_id, $NEW_MEMBER_MESSAGE);
     } else {
         //Check if user exists in database
         $user_record = $user->read("telegram_user_id", $user_id)[0];
@@ -166,12 +167,7 @@ if (isset($update->message->text)) {
 //If the user sent a callback_qeury (and not a text)
 } elseif (isset($update->callback_query)) {
     $callback_data = $update->callback_query->data;
-    switch ($callback_data) {
-        case 'joined':
-            echo "Start message to be sent\n";
-            $telegram->sendMessage($user_id, $START_MESSAGE, $main_menu);
-            break;
-        
+    switch ($callback_data) {        
         case 'new_session':
             $username = $user_info->user->username ?? 'NOT.SET';
 
