@@ -9,8 +9,8 @@
                                 "\n4: " . $default_bot . "\n5: " . json_encode($chat_sessions).
                                 "\n6: " . $current_session;
                     $stmt = $pdo->prepare("INSERT INTO `users` (`telegram_username`," .
-                    "`telegram_user_id`, `default_bot`, `chat_sessions`, `current_session`) VALUES (:tun, :ui, :db," .
-                    " :css, :cs);");
+                    "`telegram_user_id`, `default_bot`, `chat_sessions`, `current_session`, `credit`) VALUES (:tun, :ui, :db," .
+                    " :css, :cs, 25);");
                     $stmt->execute(array(':tun' => $telegram_username,
                     ':ui' => $telegram_user_id, ':db' => $default_bot, ':css' => json_encode($chat_sessions),
                     ':cs' => $current_session));

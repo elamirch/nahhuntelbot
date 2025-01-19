@@ -13,7 +13,10 @@ $current_session = [];
 $current_session_name = '';
 
 while (true) {
-sleep(2);
+if (date('H:i') === '00:00') {
+    $pdo->query('UPDATE nahhuntel.users SET credit = 25;');
+}
+sleep(1);
 echo "Last update id: " . $last_update_id . "\n";
 $updates = json_decode($telegram->getUpdates($last_update_id))->result ?? False;
 if ($updates) {
@@ -28,7 +31,6 @@ $user_id = $update->message->from->id ?? $update->callback_query->from->id;
 //first name (which is exactly what we'll use for usage monitoring
 $user_info = json_decode($telegram->getChatMember($user_id))->result;
 
-var_dump($user_info);
 //If the user sent a text (and not a callback_query)
 if (isset($update->message->text)) {
     //Ask the user to join the bot's channel if not yet joined
@@ -37,6 +39,7 @@ if (isset($update->message->text)) {
     } else {
         //Check if user exists in database
         $user_record = $user->read("telegram_user_id", $user_id)[0];
+        var_dump($user_record);
         if ($user_record != null) {
             echo "New message\n";
         } else {
@@ -144,15 +147,23 @@ if (isset($update->message->text)) {
     
                 default:
                     assign_common_variables();
+                    $credit = $user_record['credit'];
     
-                    echo "Session_id: " . $current_session_id;
-                    
-                    $telegram->sendMessage($user_id, "Wait! AI is thinking...");
+                    if($credit > 0) {
+                        echo "Session_id: " . $current_session_id;
+                        
+                        $telegram->sendMessage($user_id, "Wait! AI is thinking...");
+    
+                        $message = $chat->message($current_session_id, $update->message->text)->content;
+                        
+                        $message = $message . "\n\nConversation: " . $current_session_name ;
+                        $telegram->sendMessage($user_id, $message);
+    
+                        $user->update("telegram_user_id", $user_id, "credit", $credit-1);
+                    } else {
+                        $telegram->sendMessage($user_id, "Your 25 question limit has been reached");
+                    }
 
-                    $message = $chat->message($current_session_id, $update->message->text)->content;
-                    
-                    $message = $message . "\n\nConversation: " . $current_session_name ;
-                    $telegram->sendMessage($user_id, $message);
                     break;
             }
         }
