@@ -14,7 +14,7 @@ $current_session_name = '';
 
 while (true) {
 if (date('H:i') === '00:00') {
-    $pdo->query('UPDATE nahhuntel.users SET credit = 25;');
+    $pdo->query('UPDATE nahhuntel.users SET credit = 10;');
 }
 sleep(1);
 echo "Last update id: " . $last_update_id . "\n";
@@ -161,7 +161,7 @@ if (isset($update->message->text)) {
     
                         $user->update("telegram_user_id", $user_id, "credit", $credit-1);
                     } else {
-                        $telegram->sendMessage($user_id, "Your 25 question limit has been reached");
+                        $telegram->sendMessage($user_id, "Your 10 question limit has been reached");
                     }
 
                     break;
