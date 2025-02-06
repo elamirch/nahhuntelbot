@@ -43,4 +43,31 @@
     $telegram = new Telegram;
 
     //Create providerConfigs
+    //OpenAI
+    $gpt4 = new ProviderConfig("openai_chat_completion", "gpt-4");
+    $gpt_4_turbo = new ProviderConfig("openai_chat_completion", "gpt-4-turbo");
+    $gpt4o = new ProviderConfig("openai_chat_completion", "gpt-4o");
     $gpt4o_mini = new ProviderConfig("openai_chat_completion", "gpt-4o-mini");
+
+    //Anthropic
+    $clause3_opus = new ProviderConfig("anthropic", "claude-3-opus");
+    $clause3_sonnet = new ProviderConfig("anthropic", "claude-3-sonnet");
+    $clause3_5_sonnet = new ProviderConfig("anthropic", "claude-3-5-sonnet");
+    $clause3_haiku = new ProviderConfig("anthropic", "claude-3-haiku");
+
+    //Mistral
+    $mistral7b = new ProviderConfig("mistral", "mixtral-8x7b-instruct-v0.1");
+
+    //Goolge
+    $gemini_1_5_pro = new ProviderConfig("google", "gemini-1.5-pro");
+    $gemini_1_5_flash = new ProviderConfig("google", "gemini-1.5-flash");
+    $gemini_1_5_flash_8b = new ProviderConfig("google", "gemini-1.5-flash-8b");
+    $gemini_1_pro = new ProviderConfig("google", "gemini-1.0-pro");
+    $gemini_1_5_pro = new ProviderConfig("google", "gemini-1.5-pro");
+
+    //Grok
+    $grok_2 = new ProviderConfig("grok", "grok-2");
+
+    //Deepseek
+    $deepseek_chat = new ProviderConfig("deepseek", "deepseek-chat");
+    $deepseek_reasoner = new ProviderConfig("deepseek", "deepseek-reasoner");

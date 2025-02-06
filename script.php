@@ -142,7 +142,7 @@ if (isset($update->message->text)) {
                     $telegram->sendMessage($user_id, "Currently the bot only supports gpt-4o-mini");
                     break;
                 case 'Manual 📖':
-                    $telegram->sendMessage($user_id, "To be later filled...");
+                    $telegram->sendMessage($user_id, $MANUAL_MESSAGE);
                     break;
     
                 default:

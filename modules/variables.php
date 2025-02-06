@@ -3,6 +3,30 @@
     $START_MESSAGE = "Bot started, send any message to initiate a conversation!\n\n" .
     "\n\nAnytime you needed more help on how to make the best use of the bot, use the".
     "main menu\n\nCreated with love by @$ADMIN_USER_NAME ❤️";
+    $MANUAL_MESSAGE = "Manual: How to Use Nahhuntel AI Chatbot 🤖✨
+
+Welcome to the AI Chatbot! Follow this guide to get started and make the most out of your conversations
+    
+🚀 Getting Started:
+🔻 Open the bot and start chatting
+🔻 The bot remembers everything you tell it during a conversation, so feel free to share details and ask follow-up questions
+    
+💬 Manage Conversations:
+Go to the Conversations Menu to:
+▫️ View your previous chats 🕒
+▫️ Start a new conversation ✨
+▫️ Delete old chats 🗑
+    
+⚡️Message Limit:
+🔸 You can send up to 10 messages per day
+🔸 The limit resets every day at 00:00 Berlin time 🕛
+    
+🛠 Tips for Best Use:
+🔹 Keep your questions clear and simple for the best answers 📝
+🔹 If you start a new topic, create a new conversation for better organization.
+    
+    
+🎉 Enjoy using the bot and exploring its AI-powered responses!";
     
     //Assign, or reassign common variables
     function assign_common_variables() {
