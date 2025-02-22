@@ -1,6 +1,7 @@
-<?php
-    echo "Running\n";
-    
+<?php    
+    ini_set("log_errors", 1);
+    ini_set("error_log", "/tmp/nahhuntel-errors.log");
+
     //Reading variables from .env file
     $env = parse_ini_file('.env');
 
