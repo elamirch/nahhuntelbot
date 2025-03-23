@@ -36,6 +36,7 @@
     include_once("./classes/telegram.php");
     include_once("./classes/user.php");
     include_once("./modules/buttons.php");
+    include_once("./modules/helper-functions.php");
     
     //Create the needed objects
     $bot = new Bot;
