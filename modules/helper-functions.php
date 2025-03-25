@@ -15,11 +15,23 @@ function markdownV2ToHtml($text) {
     // Convert `inline code` to <code>inline code</code>
     $text = preg_replace('/`([^`]+)`/s', '<code>$1</code>', $text);
 
-    // Convert ```multiline code``` to <pre>multiline code</pre>
-    $text = preg_replace('/```(.*?)```/s', '<pre>$1</pre>', $text);
+    // Convert ```multiline code``` to <pre><code>multiline code</code></pre>
+    $text = preg_replace('/```(.*?)```/s', '<pre><code>$1</code></pre>', $text);
 
     // Convert [text](URL) to <a href="URL">text</a>
     $text = preg_replace('/\[(.*?)\]\((.*?)\)/s', '<a href="$2">$1</a>', $text);
+
+    // Convert PHP doc comments (e.g., /** */) to <pre><code>PHP doc comment</code></pre>
+    $text = preg_replace('/\/\*\*(.*?)\*\//s', '<pre><code>$1</code></pre>', $text);
+
+    // Convert markdown headings (e.g., # Heading, ## Heading, ### Heading) to <b>Heading</b>
+    $text = preg_replace('/^(#{1,6})\s+(.*)$/m', '<b>$2</b>', $text); // Convert all headings to bold
+
+    // Convert HTML-like tags <code> to <code> HTML tags in the example
+    $text = preg_replace('/&lt;(.*?)&gt;/s', '<code>&lt;$1&gt;</code>', $text);
+
+    // Ensure <code> blocks are wrapped properly in <pre><code> for PHP examples
+    $text = preg_replace('/<code>(.*?)<\/code>/s', '<pre><code>$1</code></pre>', $text);
 
     return $text;
 }
