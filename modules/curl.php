@@ -36,7 +36,10 @@ function curl(string $url, string $data = null, array $header = null, string $re
     for ($i=0; $i < 10; $i++) {
         try {
             $response = curl_exec($curl_session);
+            
             //Print response from the server
+            logMessage($response);
+
             return $response;
         } catch(Exception $e) {
             echo 'Curl error: ' . $e->getMessage();
