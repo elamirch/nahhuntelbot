@@ -39,8 +39,8 @@
             //Update user
             $stmt = $pdo->prepare(
                 "UPDATE `users` 
-                SET `$updateColumn` = ':wv' 
-                WHERE `$whereColumn` = ':uv'"
+                SET `$updateColumn` = :wv 
+                WHERE `$whereColumn` = :uv"
             );
 
             $stmt->execute(
@@ -51,7 +51,7 @@
             );
 
             //Log success
-            logMessage("User successfully updated: ");
+            logMessage("User successfully updated");
         }
 
         public function read($whereColumn, $whereValue) {
