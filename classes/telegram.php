@@ -17,12 +17,6 @@ class Telegram {
     public function sendMessage($user_id, $text, $reply_markup = '') {
         global $BOT_TOKEN;
 
-        //Convert Hashtags
-        $text = convertHashtag($text);
-        
-        //Escape MarkdownV2 reserved characters
-        $text = escapeMarkdownV2($text);
-
         $url = "https://api.telegram.org/bot$BOT_TOKEN/sendMessage";
         $data = array(
             "chat_id" => $user_id,

@@ -19,10 +19,9 @@ if($credit > 0) {
     $cost = number_format($cost_raw  * 1.2, 6);
 
     //Create message metadata
-    $meta_data = "ℹ️ ||".
-        "Conversation: $current_session_name \n" .
-        "Cost: $cost" . 
-        "||";
+    $meta_data = "ℹ️" . 
+        "Conversation: $current_session_name | " .
+        "Cost: $cost";
 
     //Add metadata to message
     $message = $message . "\n\n" . $meta_data;
