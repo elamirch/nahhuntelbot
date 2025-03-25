@@ -39,13 +39,13 @@
             //Update user
             $stmt = $pdo->prepare(
                 "UPDATE `users` 
-                SET `$updateColumn` = :asv 
-                WHERE `$whereColumn` = :vv"
+                SET `$updateColumn` = :wv 
+                WHERE `$whereColumn` = :uv"
             );
 
             $stmt->execute(
                 array(
-                    ':vv' => $whereValue,
+                    ':wv' => $whereValue,
                     ':uv' => $updateValue
                 )
             );
@@ -56,7 +56,7 @@
 
         public function read($whereColumn, $whereValue) {
             global $pdo;
-            return $pdo->query("SELECT * FROM `users` WHERE $whereColumn=$whereValue")->fetchAll()[0];
+            return $pdo->query("SELECT * FROM `users` WHERE `$whereColumn`='$whereValue'")->fetchAll()[0];
         }
 
         public function default_bot() {

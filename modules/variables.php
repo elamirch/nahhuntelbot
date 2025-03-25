@@ -39,7 +39,7 @@ Go to the Conversations Menu to:
         global $current_session_id;
 
         //Retrieve user chat sessions
-        $user_record = $user->read("telegram_user_id", $user_id)[0];
+        $user_record = $user->read("telegram_user_id", $user_id);
         $chat_sessions = json_decode($user_record['chat_sessions'], true);
     
         //Retrieve current user session
