@@ -50,6 +50,9 @@
     $user = new User;
     $telegram = new Telegram;
 
+    //Main Bot variable
+    $main_bot_id = $bot->main_bot_init();
+
     //Create providerConfigs
     //OpenAI
     $gpt4 = new ProviderConfig("openai_chat_completion", "gpt-4");
