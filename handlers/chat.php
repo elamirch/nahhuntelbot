@@ -19,16 +19,13 @@ if($credit > 0) {
     $cost = number_format($cost_raw  * 1.2, 6);
 
     //Create message metadata
-    $meta_data = "<code><i>".
+    $meta_data = "```".
         "Conversation: $current_session_name \n" .
         "Cost: $cost \n" . 
-        "</i></code>";
+        "```";
 
     //Add metadata to message
     $message = $message . "\n\n" . $meta_data;
-
-    //Parse to HTML
-    $message = markdownV2ToHtml($message);
     
     //Send message
     $telegram->sendMessage($user_id, $message);
