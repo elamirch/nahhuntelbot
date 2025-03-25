@@ -20,7 +20,7 @@ class Telegram {
         $data = array(
             "chat_id" => $user_id,
             "text" => $text,
-            "parse_mode" => "HTML",
+            "parse_mode" => "MarkdownV2",
             "reply_markup" => $reply_markup
         );
         $data = http_build_query($data);
