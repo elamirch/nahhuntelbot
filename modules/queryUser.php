@@ -1,7 +1,7 @@
 <?php
 
 if ($user_record != null) {
-    logMessage("New message from " . $user_record['name'] . 
+    logMessage("New message from " . $user_record['telegram_username'] . 
         " with id: " . $user_record['telegram_user_id']);
 } else {
     //When a new user joins

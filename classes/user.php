@@ -39,8 +39,8 @@
             //Update user
             $stmt = $pdo->prepare(
                 "UPDATE `users` 
-                SET `$updateColumn` = :wv 
-                WHERE `$whereColumn` = :uv"
+                SET `$updateColumn` = ':wv' 
+                WHERE `$whereColumn` = ':uv'"
             );
 
             $stmt->execute(
