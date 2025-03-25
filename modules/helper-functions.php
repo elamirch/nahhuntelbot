@@ -14,6 +14,10 @@ function escapeMarkdownV2($text) {
     return $text;
 }
 
+function convertHashtag($text) {
+    return preg_replace('/^(#{1,6})\s+(.*)$/m', '*$2*', $text);
+}
+
 function logMessage($message) {
     $logFile = "/tmp/nahhuntel-logs.log";
     $formattedMessage = "[" . date("Y-m-d H:i:s") . "] " . print_r($message, true) . "\n";
