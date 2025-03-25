@@ -1,8 +1,8 @@
 <?php
 
 if ($user_record != null) {
-    logMessage("New message from " . $user_record->name . 
-        " with id: " . $user_record->telegram_user_id);
+    logMessage("New message from " . $user_record['name'] . 
+        " with id: " . $user_record['telegram_user_id']);
 } else {
     //When a new user joins
     //If the user has no Telegram username, set it to not_set in database
