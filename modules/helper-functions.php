@@ -25,7 +25,7 @@ function markdownV2ToHtml($text) {
 }
 
 function logMessage($message) {
-    $logFile = "logs.log";
+    $logFile = "/tmp/nahhuntel-logs.log";
     $formattedMessage = "[" . date("Y-m-d H:i:s") . "] " . print_r($message, true) . "\n";
     file_put_contents($logFile, $formattedMessage, FILE_APPEND);
 }
