@@ -72,7 +72,7 @@ if (isset($update->message->text)) {
             $callback_function = substr($callback_data, 0, 3);
             //callback_function equals the first 3 letters of the conversation if no
             //functions are set as the first letters
-            assign_common_variables();            
+            assign_common_variables();
 
             switch ($callback_function) {
                 case 'sel':

@@ -6,6 +6,9 @@ if(count($chat_sessions) < 2) {
     $selected_session = substr($callback_data, 3);
     $selected_session_name = array_search($selected_session, $chat_sessions);
 
+    logMessage("Trying to delete $selected_session_name: $selected_session");
+    logMessage("Current chat sessions: " . json_encode($chat_sessions));
+    
     unset($chat_sessions[$selected_session_name]);
 
     if($current_session_id == $selected_session) {
