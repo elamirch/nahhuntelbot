@@ -37,6 +37,12 @@
     include_once("./classes/user.php");
     include_once("./modules/buttons.php");
     include_once("./modules/helper-functions.php");
+
+    //Initiating common variables
+    $user_record = [];
+    $chat_sessions = [];
+    $current_session = [];
+    $current_session_name = '';
     
     //Create the needed objects
     $bot = new Bot;

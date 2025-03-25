@@ -3,52 +3,60 @@
         public function create(string $telegram_username, int $telegram_user_id,
         string $default_bot, array $chat_sessions, string $current_session) {
             global $pdo;
-            for ($i=0; $i < 10; $i++) {
-                try {
-                    echo "\n1: " . $telegram_username . "\n2: " . $telegram_user_id . "\n3: " .
-                                "\n4: " . $default_bot . "\n5: " . json_encode($chat_sessions).
-                                "\n6: " . $current_session;
-                    $stmt = $pdo->prepare("INSERT INTO `users` (`telegram_username`," .
-                    "`telegram_user_id`, `default_bot`, `chat_sessions`, `current_session`, `credit`) VALUES (:tun, :ui, :db," .
-                    " :css, :cs, 25);");
-                    $stmt->execute(array(':tun' => $telegram_username,
-                    ':ui' => $telegram_user_id, ':db' => $default_bot, ':css' => json_encode($chat_sessions),
-                    ':cs' => $current_session));
-                    break;
-                } catch(Exception $e) {
-                    echo $e->getMessage();
-                    db_up();
-                }
-            }
+
+            //Log user creating try
+            logMessage( "Creating user: ".
+                        "1: " . $telegram_username .
+                        "2: " . $telegram_user_id .
+                        "3: " . $default_bot .
+                        "4: " . json_encode($chat_sessions).
+                        "5: " . $current_session);
+            
+            //Create user
+            $stmt = $pdo->prepare(
+                "INSERT INTO `users` (`telegram_username`," .
+                "`telegram_user_id`, `default_bot`, `chat_sessions`,".
+                " `current_session`, `credit`) VALUES (:tun, :ui, :db," .
+                " :css, :cs, 25);"
+            );
+            $stmt->execute(
+                array(
+                    ':tun' => $telegram_username,
+                    ':ui' => $telegram_user_id,
+                    ':db' => $default_bot,
+                    ':css' => json_encode($chat_sessions),
+                    ':cs' => $current_session
+                )
+            );
+
+            //Log success
+            logMessage("User successfully created");
         }
 
-        public function update($column, $value, $variable_name, $assigned_value) {
+        public function update($whereColumn, $whereValue, $updateColumn, $updateValue) {
             global $pdo;
-            for ($i=0; $i < 10; $i++) {
-                try {
-                    $stmt = $pdo->prepare("UPDATE `users` 
-                            SET `$variable_name` = :asv 
-                            WHERE `$column` = :ui");
-                    $stmt->execute(array(':ui' => $value,
-                                ':asv' => $assigned_value));
-                    break;
-                } catch(Exception $e) {
-                    echo $e->getMessage();
-                    db_up();
-                }
-            }
+
+            //Update user
+            $stmt = $pdo->prepare(
+                "UPDATE `users` 
+                SET `$updateColumn` = :asv 
+                WHERE `$whereColumn` = :vv"
+            );
+
+            $stmt->execute(
+                array(
+                    ':vv' => $whereValue,
+                    ':uv' => $updateValue
+                )
+            );
+
+            //Log success
+            logMessage("User successfully updated: ");
         }
 
-        public function read($column, $value) {
+        public function read($whereColumn, $whereValue) {
             global $pdo;
-            for ($i=0; $i < 10; $i++) {
-                try {
-                    return $pdo->query("SELECT * FROM `users` WHERE $column=$value")->fetchAll();
-                } catch(Exception $e) {
-                    echo $e->getMessage();
-                    db_up();
-                }
-            }
+            return $pdo->query("SELECT * FROM `users` WHERE $whereColumn=$whereValue")->fetchAll()[0];
         }
 
         public function default_bot() {

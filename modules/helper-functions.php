@@ -23,3 +23,13 @@ function markdownV2ToHtml($text) {
 
     return $text;
 }
+
+function logMessage($message) {
+    $logFile = "logs.log";
+    $formattedMessage = "[" . date("Y-m-d H:i:s") . "] " . print_r($message, true) . "\n";
+    file_put_contents($logFile, $formattedMessage, FILE_APPEND);
+}
+
+function getCheckpoint(array $user_record): mixed {
+    return !empty($user_record['checkpoint']) ? json_decode($user_record['checkpoint']) : false;
+}
