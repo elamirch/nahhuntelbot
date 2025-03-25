@@ -36,6 +36,21 @@ function markdownV2ToHtml($text) {
     return $text;
 }
 
+function escapeMarkdownV2($text) {
+    // List of reserved characters that need to be escaped in markdown v2
+    $reservedCharacters = [
+        '*', '_', '[', ']', '(', ')', '~', '>', '#', '+', '-', '=', '|', '{', '}', '.', '!'
+    ];
+
+    // Loop through the reserved characters and escape them
+    foreach ($reservedCharacters as $char) {
+        $text = str_replace($char, '\\' . $char, $text);
+    }
+
+    return $text;
+}
+
+
 function logMessage($message) {
     $logFile = "/tmp/nahhuntel-logs.log";
     $formattedMessage = "[" . date("Y-m-d H:i:s") . "] " . print_r($message, true) . "\n";
