@@ -27,7 +27,7 @@ function convertMarkdownToTelegram($markdown) {
 
     // Handle inline code `code`
     $markdown = preg_replace_callback('/`([^`]*)`/', function($m) {
-        return '`' . str_replace(['`', '\\'], ['\\`', '\\\\'], $m[1]) . '`';
+        return '`' . str_replace('`', '\\', $m[1]) . '`';
     }, $markdown);
 
     // Convert links [text](url)
