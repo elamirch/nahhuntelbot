@@ -43,6 +43,7 @@ function curl(string $url, string $data = null, array $header = null, string $re
             return $response;
         } catch(Exception $e) {
             echo 'Curl error: ' . $e->getMessage();
+            sleep(2);
         }
     }
 }
