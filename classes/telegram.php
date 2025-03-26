@@ -36,7 +36,7 @@ class Telegram {
         );
 
         $data = json_encode($data);
-        $data = stripslashes($data);
+        $data = removeDoubleBackslashes($data);
         return curl($url,$data, $header);
     }
     

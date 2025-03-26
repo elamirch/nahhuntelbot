@@ -56,3 +56,7 @@ function logMessage($message) {
 function getCheckpoint(array $user_record): mixed {
     return !empty($user_record['checkpoint']) ? json_decode($user_record['checkpoint']) : false;
 }
+
+function removeDoubleBackslashes($text) {
+    return preg_replace('/\\\\(?!["\\\\\/bfnrt])/', '', $text);
+}
