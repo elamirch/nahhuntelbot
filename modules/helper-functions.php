@@ -20,16 +20,10 @@ function convertMarkdownToTelegram($markdown) {
         return $text;
     };
 
-    // Convert bold **text** to *text*
-    $markdown = preg_replace_callback('/\*\*(.+?)\*\*/s', function($m) use ($escape) {
-        return '*' . $escape($m[1]) . '*';
-    }, $markdown);
-
-    // Convert italic *text* to _text_ (ensure it does not match already-converted bold text)
+    // Convert italic *text* to __text__ (ensure it does not match already-converted bold text)
     $markdown = preg_replace_callback('/(?<!\*)\*((?:(?!\*).)+?)\*(?!\*)/s', function($m) use ($escape) {
-        return '_' . $escape($m[1]) . '_';
+        return '__' . $escape($m[1]) . '__';
     }, $markdown);
-
 
     // Handle inline code `code`
     $markdown = preg_replace_callback('/`([^`]*)`/', function($m) {
@@ -50,7 +44,7 @@ function convertMarkdownToTelegram($markdown) {
 }
 
 function convertHashtag($text) {
-    return preg_replace('/^(#{1,6})\s+(.*)$/m', '*$2*', $text);
+    return preg_replace('/^(#{1,6})\s+(.*)$/m', '**$2**', $text);
 }
 
 function logMessage($message) {

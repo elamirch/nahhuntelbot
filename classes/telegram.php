@@ -17,10 +17,14 @@ class Telegram {
     public function sendMessage($user_id, $text, $reply_markup = '') {
         global $BOT_TOKEN;
 
-        //Refine the text
+        //Refine the text (and log)
+        logMessage("Pre refinement: " . $text . "\n");
         $text = convertHashtag($text);
+        logMessage("Post hashtag conversion: " . $text . "\n");
         $text = convertMarkdownToTelegram($text);
+        logMessage("Post Markdown to Telegram conversion: " . $text . "\n");
         $text = escapeMarkdownV2($text);
+        logMessage("Post escapeMarkdownV2: " . $text . "\n");
 
         $url = "https://api.telegram.org/bot$BOT_TOKEN/sendMessage";
         $data = array(
