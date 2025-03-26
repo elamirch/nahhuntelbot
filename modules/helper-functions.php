@@ -29,10 +29,11 @@ function convertMarkdownToTelegram($markdown) {
         return '*' . $escape($m[1]) . '*';
     }, $markdown);
 
-    // Convert italic *text* to _text_
-    $markdown = preg_replace_callback('/\*((?:(?!\*).)+?)\*/s', function($m) use ($escape) {
+    // Convert italic *text* to _text_ (ensure it does not match already-converted bold text)
+    $markdown = preg_replace_callback('/(?<!\*)\*((?:(?!\*).)+?)\*(?!\*)/s', function($m) use ($escape) {
         return '_' . $escape($m[1]) . '_';
     }, $markdown);
+
 
     // Handle inline code `code`
     $markdown = preg_replace_callback('/`([^`]*)`/', function($m) {
