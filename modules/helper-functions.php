@@ -21,10 +21,11 @@ function convertMarkdownToTelegram($markdown) {
     // Convert italic *text*
     $markdown = preg_replace('/(?<!\*)\*((?:(?!\*).)+?)\*(?!\*)/s', '<i>\1</i>', $markdown);
 
-    // Handle inline code `code`
-    $markdown = preg_replace_callback('/`([^`]*)`/', function($m) {
-        return '`' . str_replace('`', '\\', $m[1]) . '`';
-    }, $markdown);
+    // Convert multiline code block: ```code``` becomes <pre><code>code</code></pre>
+    $markdown = preg_replace('/```(.*?)```/s', '<pre><code>\1</code></pre>', $markdown);
+    
+    // Convert inline code: `code` becomes <code>code</code>
+    $markdown = preg_replace('/`([^`]+)`/', '<code>\1</code>', $markdown);
 
     // Convert links ([Link](url))
     $markdown = preg_replace('/\[(.*?)\]\((.*?)\)/', '<a href="\2">\1</a>', $markdown);
