@@ -27,14 +27,20 @@ class Telegram {
         logMessage("Post escapeMarkdownV2: " . $text . "\n");
 
         $url = "https://api.telegram.org/bot$BOT_TOKEN/sendMessage";
+
         $data = array(
             "chat_id" => $user_id,
             "text" => $text,
             "parse_mode" => "MarkdownV2",
             "reply_markup" => $reply_markup
         );
+
+        $header = array(
+            'Content-Type: application/json',
+        );
+        
         $data = json_encode($data);
-        return curl($url,$data);
+        return curl($url,$data, $header);
     }
     
     public function getUpdates($offset) {
