@@ -21,7 +21,7 @@ if($credit > 0) {
     //Create message metadata
     $meta_data = "ℹ️ " . 
         "Conversation: $current_session_name | " .
-        "Cost: $cost";
+        "Cost: $cost$";
 
     //Add metadata to message
     $message = $message . "\n\n" . $meta_data;

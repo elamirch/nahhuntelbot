@@ -52,12 +52,15 @@ if (isset($update->message->text)) {
         }
 
         //Send usage info to admin
-        $telegram->sendMessage($ADMIN_CHAT_ID,
-            $user_info->user->first_name . " is using the bot\n" .
-            "Username: @" . $user_info->user->username . "\n" .
-            "User ID: " . $user_id . "\n" .
-            "Cost: $cost"
-        );
+        $admin_message = $user_info->user->first_name . " is using the bot\n" .
+        "Username: @" . $user_info->user->username . "\n" .
+        "User ID: " . $user_id . "\n";
+
+        if(isset($cost)) {
+            $admin_message .= "Cost: $cost$";
+        }
+        
+        $telegram->sendMessage($ADMIN_CHAT_ID, $admin_message);
     }
 //If the user sent a callback_qeury (and not a text)
 } elseif (isset($update->callback_query)) {
