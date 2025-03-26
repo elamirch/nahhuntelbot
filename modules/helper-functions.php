@@ -1,17 +1,13 @@
 <?php
 
 function escapeMarkdownV2($text) {
-    // List of reserved characters that need to be escaped in markdown v2
-    $reservedCharacters = [
-        '*', '_', '[', ']', '(', ')', '~', '>', '#', '+', '-', '=', '|', '{', '}', '.', '!'
-    ];
+    // List of characters that need to be escaped in Telegram Markdown V2
+    $reservedCharacters = '/([*_\\[\\]()~`>#+\\-=|{}.!])/'; // Escape characters properly
 
-    // Loop through the reserved characters and escape them
-    foreach ($reservedCharacters as $char) {
-        $text = str_replace($char, '\\' . $char, $text);
-    }
-
-    return $text;
+    // Use preg_replace_callback to escape them
+    return preg_replace_callback($reservedCharacters, function ($matches) {
+        return '\\' . $matches[1];
+    }, $text);
 }
 
 function convertMarkdownToTelegram($markdown) {
