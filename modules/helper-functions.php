@@ -12,31 +12,27 @@ function escapeMarkdownV2($text) {
 
 function convertMarkdownToTelegram($markdown) {
 
-    // Convert italic *text* to __text__ (ensure it does not match already-converted bold text)
-    $markdown = preg_replace_callback('/(?<!\*)\*((?:(?!\*).)+?)\*(?!\*)/s', function($m) {
-        return '__' . $m[1] . '__';
-    }, $markdown);
+    //Headers
+    $markdown = preg_replace('/^(#{1,6})\s+(.*)$/m', '<b>$2</b>', $markdown);
+
+    // Convert bold **bold**
+    $markdown = preg_replace('/\*\*(.*?)\*\*/', '<b>\1</b>', $markdown);
+
+    // Convert italic *text*
+    $markdown = preg_replace_callback('/(?<!\*)\*((?:(?!\*).)+?)\*(?!\*)/s', '<i>\1</i>', $markdown);
 
     // Handle inline code `code`
     $markdown = preg_replace_callback('/`([^`]*)`/', function($m) {
         return '`' . str_replace('`', '\\', $m[1]) . '`';
     }, $markdown);
 
-    // Convert links [text](url)
-    $markdown = preg_replace_callback('/\[([^\]]*)\]\(([^\)]*)\)/', function($m) {
-        return '[' . $m[1] . '](' . $m[2] . ')';
-    }, $markdown);
+    // Convert links ([Link](url))
+    $markdown = preg_replace('/\[(.*?)\]\((.*?)\)/', '<a href="\2">\1</a>', $markdown);
 
-    // Convert blockquotes (multi-line)
-    $markdown = preg_replace_callback('/(^>.*$)/m', function($m) {
-        return $m[1];
-    }, $markdown);
+    // Convert blockquotes (lines starting with >)
+    $markdown = preg_replace('/^\s*>\s*(.*)$/m', '<blockquote>\1</blockquote>', $markdown);
 
     return $markdown;
-}
-
-function convertHashtag($text) {
-    return preg_replace('/^(#{1,6})\s+(.*)$/m', '**$2**', $text);
 }
 
 function logMessage($message) {

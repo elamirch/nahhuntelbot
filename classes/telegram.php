@@ -18,7 +18,6 @@ class Telegram {
         global $BOT_TOKEN;
 
         //Refine the text
-        $text = convertHashtag($text);
         $text = convertMarkdownToTelegram($text);
         $text = escapeMarkdownV2($text);
 
@@ -27,7 +26,7 @@ class Telegram {
         $data = array(
             "chat_id" => $user_id,
             "text" => $text,
-            "parse_mode" => "MarkdownV2",
+            "parse_mode" => "HTML",
             "reply_markup" => $reply_markup
         );
 
