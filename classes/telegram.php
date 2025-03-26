@@ -20,6 +20,7 @@ class Telegram {
         //Refine the text
         $text = convertHashtag($text);
         $text = convertMarkdownToTelegram($text);
+        $text = escapeMarkdownV2($text);
 
         $url = "https://api.telegram.org/bot$BOT_TOKEN/sendMessage";
 
