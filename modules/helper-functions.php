@@ -19,7 +19,7 @@ function convertMarkdownToTelegram($markdown) {
     $markdown = preg_replace('/\*\*(.*?)\*\*/', '<b>\1</b>', $markdown);
 
     // Convert italic *text*
-    $markdown = preg_replace_callback('/(?<!\*)\*((?:(?!\*).)+?)\*(?!\*)/s', '<i>\1</i>', $markdown);
+    $markdown = preg_replace('/(?<!\*)\*((?:(?!\*).)+?)\*(?!\*)/s', '<i>\1</i>', $markdown);
 
     // Handle inline code `code`
     $markdown = preg_replace_callback('/`([^`]*)`/', function($m) {
