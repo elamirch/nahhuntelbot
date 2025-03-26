@@ -17,6 +17,8 @@ function curl(string $url, string $data = null, array $header = null, string $re
         curl_setopt($curl_session, CURLOPT_POSTFIELDS, $data);
     }
 
+    logMessage('\nDATA: '. $data);
+
     //Using proxy if set in .env file
     global $USE_PROXY;
     if($USE_PROXY){
