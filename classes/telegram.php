@@ -33,7 +33,7 @@ class Telegram {
             "parse_mode" => "MarkdownV2",
             "reply_markup" => $reply_markup
         );
-        $data = http_build_query($data);
+        $data = json_encode($data);
         return curl($url,$data);
     }
     
