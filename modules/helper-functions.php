@@ -49,3 +49,9 @@ function getCheckpoint(array $user_record): mixed {
 function removeDoubleBackslashes($text) {
     return preg_replace('/\\\\(?!["\\\\\/bfnrt])/', '', $text);
 }
+
+function dm($message) {
+    global $telegram;
+    global $user_id;
+    $telegram->sendMessage($user_id, $message);
+}
