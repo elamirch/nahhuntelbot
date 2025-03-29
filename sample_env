@@ -1,6 +1,21 @@
 # This is a sample .env file
-# any value other than True for USE_PROXY will disable proxy settings in curl
+# Any value other than True for USE_PROXY will disable proxy settings in curl
 
+# API keys
 BOT_TOKEN= YOUR_TELEGRAM_BOT_TOKEN_GOES_HERE
 MODEL_PROVIDER_API_KEY= YOUR_API_KEY_GOES_HERE
+
+# Proxy setting
 USE_PROXY=True
+
+# Database settings
+DB_HOST=localhost
+DB_PORT=3306
+DB_NAME=nahhuntel
+DB_USER=nahhuntel
+DB_PASS=YOUR_PASSWORD
+
+# Telegram bot settings
+ADMIN_CHAT_ID = "YOUR_ADMINS_CHAT_ID"
+ADMIN_USER_NAME = "YOUR_ADMINS_USERNAME"
+ASSOCIATED_CHANNEL = "YOUR_CHANNEL"
